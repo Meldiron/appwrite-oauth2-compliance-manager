@@ -10,7 +10,7 @@ export const OAUTH = {
   endSessionEndpoint: `${APPWRITE_BASE}/oauth2/console/logout`,
 
   clientId: 'complience-mamager',
-  redirectUri: 'http://localhost:3000/redirect',
+  redirectUri: `${window.location.origin}/redirect`,
   scope: 'organization:organization.memberships.read',
 }
 
