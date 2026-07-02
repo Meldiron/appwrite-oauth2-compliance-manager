@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { logout } from '../auth/oauth'
+import { logout, getToken } from '../auth/oauth'
 
 export function ShieldMark({ className }) {
   return (
@@ -41,12 +41,14 @@ export function TopBar({ user, centered }) {
             <div className="brand__sub">Compliance Manager</div>
           </div>
         </div>
-        {user && (
+        {(user || getToken()) && (
           <div className="topbar__meta">
-            <div className="topbar__user">
-              <b>{user.name || 'Signed in'}</b>
-              <span>{user.email}</span>
-            </div>
+            {user && (
+              <div className="topbar__user">
+                <b>{user.name || 'Signed in'}</b>
+                <span>{user.email}</span>
+              </div>
+            )}
             <button
               className="btn btn--ghost"
               onClick={() => {

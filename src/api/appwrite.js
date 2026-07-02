@@ -12,9 +12,9 @@ function authHeaders() {
   }
 }
 
-async function apiGet(path, search) {
+async function apiGet(path, search, extraHeaders) {
   const url = `${APPWRITE_BASE}${path}${search ? `?${search}` : ''}`
-  const res = await fetch(url, { headers: authHeaders() })
+  const res = await fetch(url, { headers: { ...authHeaders(), ...extraHeaders } })
   if (!res.ok) {
     let detail = `HTTP ${res.status}`
     try {
@@ -67,7 +67,9 @@ function membershipQueries(limit, offset) {
 
 // Fetch a single page of memberships for a team/organization.
 export async function fetchMembershipsPage(teamId, offset) {
-  return apiGet(`/teams/${encodeURIComponent(teamId)}/memberships`, membershipQueries(PAGE_SIZE, offset))
+  return apiGet('/organization/memberships', membershipQueries(PAGE_SIZE, offset), {
+    'X-Appwrite-Organization': teamId,
+  })
 }
 
 // Fetch every membership for a team, paginating with offset until exhausted.
