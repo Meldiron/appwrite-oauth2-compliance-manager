@@ -11,8 +11,7 @@ export const OAUTH = {
 
   clientId: 'complience-mamager',
   redirectUri: 'http://localhost:3000/redirect',
-  // TEMPORARILY: requesting 'organization:organization.keys.read' for now.
-  scope: 'organization:organization.keys.read',
+  scope: 'organization:organization.memberships.read',
 }
 
 // Appwrite Console requests are scoped to the "console" project.
